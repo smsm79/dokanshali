@@ -1,80 +1,1304 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
 
-# dokanshali
+# Dokan Shali
+BF eshop API is used for communication between client's eshop and server backend. Only supported format is JSON.
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+All requests are send via **HTTPS**. Every request (except <code>/users</code>) must start with <code>user</code> parameter which identifies specific user
 
-## Questions Collection [/questions]
+# Product XML Feed
 
-### List All Questions [GET]
+    <?xml version="1.0" encoding="UTF-8"?>
+    <BF>
+        <PRODUCT>
+            <!-- signle product entity -->
+            <PRODUCT_NAME>
+                <!-- name of product (string) -->
+                <![CDATA[Leggings Arola]]>
+            </PRODUCT_NAME>
+            <BEST_SALES_RANK>
+                <!-- rank for sort order best sales (integer) -->
+                3374
+            </BEST_SALES_RANK>
+            <PRODUCT_ID>
+                <!-- original product id (integer) -->
+                919
+            </PRODUCT_ID>
+            <ITEM_GROUP_ID>
+                <!-- variants group id -->
+                12345
+            </ITEM_GROUP_ID>
+            <IS_NEW>
+                <!-- is product new? (bool) -->
+                0
+            </IS_NEW>
+            <SALE>
+                <!-- is product discounted (bool) -->
+                1
+            </SALE>
+            <BRAND>
+                <!-- product brand -->
+                <BRAND_ID>
+                    <!-- brand id (integer) -->
+                    123
+                </BRAND_ID>
+                <BRAND_NAME>
+                    <!-- brand name (string) -->
+                    <![CDATA[JENNIKA]]>
+                </BRAND_NAME>
+                <BRAND_IMG>
+                    <!-- url of brand image (string) -->
+                    http://img.example.com/brands/logo/jennika-7150.jpg
+                </BRAND_IMG>
+                <IS_PREMIUM>
+                    <!-- is brand premium? (bool) -->
+                    1
+                </IS_PREMIUM>
+            </BRAND>
+            <COLLECTIONS>
+                <!-- product collections list -->
+                <COLLECTION>
+                    <!-- collection of the product -->
+                    <COLLECTIONTEXT>
+                        <!-- collection name (string) -->
+                        <![CDATA[Jennika]]>
+                    </COLLECTIONTEXT>
+                    <COLLECTION_ID>
+                        <!-- collection id (integer) -->
+                        <![CDATA[78]]>
+                    </COLLECTION_ID>
+                </COLLECTION>
+            </COLLECTION>    
+            <CATEGORIES>
+                <!-- product categories list -->
+                <CATEGORY>
+                    <!-- specific category -->
+                    <CATEGORYTEXT>
+                        <!-- category name (levels separated by | ) (string) -->
+                        <![CDATA[Jeans and Trousers | Leggings]]>
+                    </CATEGORYTEXT>
+                    <CATEGORYID>
+                        <!-- category id (integer) -->
+                        <![CDATA[118]]>
+                    </CATEGORYID>
+                </CATEGORY>
+                <CATEGORY>
+                    <CATEGORYTEXT>
+                        <!-- category name (levels separated by | ) (string) -->
+                        <![CDATA[Jeans and Trousers | Others]]>
+                    </CATEGORYTEXT>
+                    <CATEGORYID>
+                        <!-- category id (integer) -->
+                        <![CDATA[119]]>
+                    </CATEGORYID>                
+                </CATEGORY>
+            </CATEGORIES>
+            <DESCRIPTION>
+                <!-- product description in HTML (string) -->
+                <![CDATA[This leggings are made of very cool material and looks like normal jeans.]]>
+            </DESCRIPTION>
+            <LINK>
+                <!-- product URL (string)
+                http://cz.example.com/leggins1/leggins-arola
+            </LINK>
+            <SIZES>
+                <!-- available sizes -->
+                <SIZE>
+                    <!-- specific size object -->
+                    <ID>
+                        <!-- original id of size (integer) -->
+                        19
+                    </ID>
+                    <NAME>
+                        <!-- size name (label) (string) -->
+                        universal S-L
+                    </NAME>
+                    <CODE>
+                        <!-- code of size (integer/string) -->
+                        14
+                    </CODE>
+                </SIZE>
+            </SIZES>
+            <COLORS>
+                <!-- available colors -->
+                <COLOR>
+                    <!-- specific color object -->
+                    <IMAGES>
+                        <!-- images of color variant -->
+                        <IMAGE>
+                            <!-- image url (string) -->
+                            http://img.example.com/products/presentation/5c4bed9c5690da35dd74c988534fcee6eeb3a85f.jpg
+                        </IMAGE>
+                        <THUMBNAIL>
+                            <!-- url of thumbnail of previus image (string) --> 
+                            http://img.example.com/products/small/5c4bed9c5690da35dd74c988534fcee6eeb3a85f.jpg
+                        </THUMBNAIL>
+                        <IMAGE>
+                            http://img.example.com/products/presentation/d103b0be47e599434b089babc0d1d820227984aa.jpg
+                        </IMAGE>
+                        <THUMBNAIL>
+                            http://img.example.com/products/small/d103b0be47e599434b089babc0d1d820227984aa.jpg
+                        </THUMBNAIL>
+                    </IMAGES>
+                    <ID>
+                        <!-- id of color variant (integer) -->
+                        8
+                    </ID>
+                    <NAME>
+                        <!-- color name (string) -->
+                        black
+                    </NAME>
+                    <RGB>
+                        <!-- color RGB code (string) -->
+                        000000
+                    </RGB>
+                    <CODE>
+                        <!-- color code (integer/string) -->
+                        002
+                    </CODE>
+                </COLOR>
+                <COLOR>
+                    <IMAGES>
+                        <IMAGE>
+                            http://img.example.com/products/presentation/4d46565ce40012fd0de38e9401b2e37fa7f89af7.jpg
+                        </IMAGE>
+                        <THUMBNAIL>
+                            http://img.example.com/products/small/4d46565ce40012fd0de38e9401b2e37fa7f89af7.jpg
+                        </THUMBNAIL>
+                        <IMAGE>
+                            http://img.example.com/products/presentation/842787480d6b0ed034c3abcd077023d74bebee2a.jpg
+                        </IMAGE>
+                        <THUMBNAIL>
+                            http://img.example.com/products/small/842787480d6b0ed034c3abcd077023d74bebee2a.jpg
+                        </THUMBNAIL>
+                        <IMAGE>
+                            http://img.example.com/products/presentation/2136dde8bad682aa03997848b9f7ec5c66fd1aa9.jpg
+                        </IMAGE>
+                        <THUMBNAIL>
+                            http://img.example.com/products/small/2136dde8bad682aa03997848b9f7ec5c66fd1aa9.jpg
+                        </THUMBNAIL>
+                        <IMAGE>
+                            http://img.example.com/products/presentation/c622274dd4905f4498c4da405bd204bcc1f8c708.jpg
+                        </IMAGE>
+                        <THUMBNAIL>
+                            http://img.example.com/products/small/c622274dd4905f4498c4da405bd204bcc1f8c708.jpg
+                        </THUMBNAIL>
+                    </IMAGES>
+                    <ID>
+                        26
+                    </ID>
+                    <NAME>
+                        blue
+                    </NAME>
+                    <RGB>
+                        0033f0
+                    </RGB>
+                    <CODE>
+                        020
+                    </CODE>
+                </COLOR>
+            </COLORS>
+            <SKUS>
+                <!-- available stock keeping units (variants) -->
+                <SKU>
+                    <ID>
+                        <!-- stock keeping unit identifier (string) -->
+                        I000919-020-11
+                    </ID>
+                    <PCS_IN_STOCK>
+                        <!-- number of pieces in stock -->
+                        1
+                    </PCS_IN_STOCK>
+                    <COLOR_ID>
+                        <!-- variant color id -->
+                        4891
+                    </COLOR_ID>
+                    <SIZE_ID>
+                        <!-- variant size id -->
+                        4865
+                    </SIZE_ID>
+                </SKU>
+                <SKU>
+                    <ID>
+                        <!-- stock keeping unit identifier (string) -->
+                        I000919-020-10
+                    </ID>
+                    <PCS_IN_STOCK>
+                        0
+                    </PCS_IN_STOCK>
+                    <COLOR_ID>
+                        4891
+                    </COLOR_ID>
+                    <SIZE_ID>
+                        4865
+                    </SIZE_ID>
+                </SKU>
+            </SKUS>
+            <PRICES>
+                <!-- prices object -->
+                <PRICE>
+                    <!-- product price in shop currency (numeric) -->
+                    340
+                </PRICE>
+                <PROMO_PRICE>
+                    <!-- discount price of product in shop currency (numeric) -->
+                    249
+                </PROMO_PRICE>
+            </PRICES>
+        </PRODUCT>
+    </BF>
 
-+ Response 200 (application/json)
+# Group Orders
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
+## Orders collection [/{user}/orders?limit=20&offset=0]
+
+### List all orders [GET]
+| Attribute | Description |
+| --------- | ----------- |
+| id | order identifier |
+| date_created | timestamp of creating the order in ISO 8601:2004 |
+| status | order status (new, in_process, completed, canceled,...) |
+| total | total price of order |
+| currency | shop currency |
+
++ Parameters
+    + limit (optional, integer) ... number of displayed records (default 20)
+    + offset (optional, integer) ... page number (default 0)
+
++ Request (application/json)
+
++ Response 200 (application/json) 
+
+        {
+            "metadata": {
+                "links": [
+                    { "first": "orders?limit=20&offset=1" },
+                    { "last": "orders?limit=20&offset=4" },
+                    { "prev": "orders?limit=20&offset=1" },
+                    { "next": "orders?limit=20&offset=3" },
+                    { "self": "orders?limit=20&offset=2" }
                 ]
-            }
-        ]
+            },            
+            "records": [
+                {
+                    "id": 10,
+                    "date_created": "1997-07-16T19:20:30+01:00",
+                    "status": "Completed",
+                    "total": 150,
+                    "currency": "CZK"
+                },
+                {
+                    "id": 11,
+                    "date_created": "1997-07-16T19:20:30+01:00",
+                    "status": "Completed",
+                    "total": 100,
+                    "currency": "CZK"
+                }            
+            ]
+        }
+        
 
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+### Create new order [POST]
+| Attribute | Description |
+| --------- | ----------- |
+| id | id of new order | 
+| shipping_type | id of selected order shipping |
+| payment_type | id of of selected payment type |
+| name | customer name |
+| email | customer email |
+| country | delivery address - country (optional) |
+| region | delivery address - region (optional) |
+| city | delivery address - city |
+| street | delivery address - street |
+| house_number | delivery address - house number |
+| zip | delivery address - zip |
+| note | note to order |
+| ip | customer ip |
 
 + Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+            "shipping_type": 2,
+            "payment_type": 1,
+            "name": "John Doe",
+            "email": "ondra@b.cz",
+            "country": "Test country",
+            "region": "Test region",
+            "city": "Brno",
+            "street": "Tomkova",
+            "house_number": "18a",
+            "zip": "612 00",
+            "note": "1st flor",
+            "ip": "10.10.1.2"
         }
 
 + Response 201 (application/json)
 
-    + Headers
+        {
+            "id": 1
+        }
 
-            Location: /questions/2
++ Response 422 (application/json)
 
-    + Body
+        { "error": "You have to fill in all the information." }
 
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
+## Order [/{user}/orders/{id}]
+
+### Get order details [GET]
+| Attribute | Description |
+| --------- | ----------- |
+| id | id of the order | 
+| date _created | date of creating the order in ISO 8601:2004 |
+| status | order status (new, in_process, completed, canceled,...) |
+| total | total price of order |
+| shipping_name | name of selected shipping method | 
+| shipping_price | price of selected shipping |
+| currency | shop currency |
+| products | list of ordered products |
+
+#### Ordered Product
+| Attribute | Description |
+| --------- | ----------- |
+| id | ordered product id (not product id!) |
+| quantity | ordered quantity of product |
+| product | shop product object |
+
+#### Shop product
+| Attribute | Description |
+| --------- | ----------- |
+| id | 5 |
+| name | name of the product |
+| price | price of the product |
+| image | product image |
+| color_id | id of product color |
+| size_id | id of product size |
+
++ Parameters
+    + id (id) ... order id
+
++ Request (application/json)
+
++ Response 200 (application/json)
+
+        {
+            "id": 10,
+            "date_created": "1997-07-16T19:20:30+01:00",
+            "status": "Completed",
+            "total": 150,
+            "shipping_name": "Shipping method 1",
+            "shipping_price": 50,
+            "currency": "CZK",
+            "products": [
+                {
+                    "id": 1,
+                    "quantity": 1,
+                    "product": {
+                        "id": 5,
+                        "name": "Blue shirt",
+                        "price": 150,
+                        "image": "http://images.com/image001.jpg",
+                        "color_id": 2,
+                        "size_id": 8
                     }
-                ]
+                }
+            ]
+        }
+        
+### Cancel order [DELETE]
++ Parameters
+    + id (id) ... order id
+
++ Request (application/json)
+
++ Response 200 (application/json)
+
++ Response 422 (application/json)
+
+        {
+            "error": "Cannot cancel this order."
+        }
+        
+        
+# Group Users
+User information requests must be secured over SSL
+
+| Attribute | Description |
+| --------- | ----------- |
+| id | user identifier |
+| name | name and surname |
+| city | address - city |
+| street | address - street |
+| house_number | address - house number |
+| zip | city zip number |
+| email | e-mail address |
+| phone | phone number |
+
+## User verification [/users/verify]
+
+### Verify user [POST]
+
++ Request (application/json)
+
+        {
+            "email": "user@example.com"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": 45239,
+            "name": "John Doe",
+            "city": "Brno",
+            "street": "Tomkova",
+            "house_number": "18a",
+            "zip": "612 00",
+            "phone": "+420 739 444 888",
+            "email": "john@doe.com"
+        }
+
++ Response 400 (application/json)  
+
+## User registration [/users/register]
+
+### Register new user [POST]
+
++ Request (application/json)
+
+        {
+            "username": "user@example.com",
+            "password": "Password123"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": 45239
+        }
+
++ Response 400 (application/json)  
+
+        {
+            "error": "Missing field username"
+        }
+
++ Response 422 (application/json)
+
+        {
+            "error": "Invalid password"
+        }
+        
+## User login [/users/login]
+
+### Login user [POST]
+
++ Request (application/json)
+
+        {
+            "username": "user@example.com",
+            "password": "Password123"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": 45239,
+            "name": "John Doe",
+            "city": "Brno",
+            "street": "Tomkova",
+            "house_number": "18a",
+            "zip": "612 00",
+            "phone": "+420 739 444 888",
+            "email": "john@doe.com"
+        }
+
++ Response 400 (application/json)  
+
+        {
+            "error": "Missing field username"
+        }
+
++ Response 422 (application/json)
+
+        {
+            "error": "Invalid password"
+        }
+
+## User FB login [/users/facebookLogin]
+
+### Facebook login user [POST]
+
++ Request (application/json)
+
+        {
+            "fb_id": "258789963",
+            "fb_access_token": "f8q5h6o5f5a65c162o10"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": 45239,
+            "fb_id": "258789963",
+            "name": "John Doe",
+            "email": "john@doe.com",
+            "gender": "man"
+        }
+
++ Response 400 (application/json)  
+
+        {
+            "error": "Missing field fb_access_token"
+        }
+
++ Response 422 (application/json)
+
+        {
+            "error": "Invalid access token"
+        }
+        
+## Change password [/{user}/change-password]
+
+### Change user's password [PUT]
+
++ Request (application/json)
+
+        {
+            "old_password": "OldPassword123",
+            "new_password": "NewPasssword123"
+        }
+        
++ Response 200 (application/json)
+
++ Response 400 (application/json)
+
+        {
+            "error": "Invalid request body"
+        }
+        
++ Response 422 (application/json)
+
+        {
+            "error": "Invalid password"
+        }
+        
+## Reset password [/reset-password]
+
+### Reset user's password [POST]
+
++ Request (application/json)
+
+        {
+            "email": "test@example.com"
+        }
+        
++ Response 200 (application/json)
+
++ Response 400 (application/json)
+
+        {
+            "error": "Cannot reset password"
+        }
+
+## User [/users/{id}]
+Single user. 
+
+### Get user details [GET]
++ Parameters
+    + id (id) ... user id
+
++ Request (application/json)
+
++ Response 200 (application/json)
+
+        {
+            "id": 4,
+            "name": "John Doe",
+            "city": "Brno",
+            "street": "Tomkova",
+            "house_number": "18a",
+            "zip": "612 00",
+            "phone": "+420 739 444 888",
+            "email": "john@doe.com"
+        }
+
+### Update user details [PUT]
++ Parameters
+    + id (id) ... user id
+
++ Request (application/json)
+
+        {
+            "name": "John Doe",
+            "city": "Brno",
+            "street": "Tomkova",
+            "house_number": "18a",
+            "zip": "612 00",
+            "phone": "+420 739 444 888",
+            "email": "john@doe.com"
+        }
+
++ Response 200 (application/json)
+
+
+# Group Cart
+
+| Attribute | Description |
+| --------- | ----------- |
+| products | list of products in cart |
+| shipping_price | price of selected shipping |
+| total_count | total count of products |
+| total_price | total price of products |
+| currency | currency symbol |
+
+## Cart [/{user}/cart]
+
+### Get cart contents [GET]
+| Attribute | Description |
+| --------- | ----------- |
+| total_count | number of products in cart |
+| total_price | total price of items in cart |
+| currency | shop currency |
+| products | products in cart |
+
+#### Product in cart
+| Attribute | Description |
+| --------- | ----------- |
+| id | cart product id (not product id!) |
+| quantity | cart quantity of product |
+| product | shop product object |
+
+#### Discount in cart
+| Attribute | Description |
+| --------- | ----------- |
+| id | cart discount id (not discount id!) |
+| quantity | cart quantity of discount |
+| discount | shop discount object |
+
+#### Shop product
+| Attribute | Description |
+| --------- | ----------- |
+| id | id of the product |
+| name | name of the product |
+| price | price of the product |
+| discount_price | discount price of the product |
+| image | product image |
+| color_id | id of product color |
+| size_id | id of product size |
+
+#### Shop discount
+| Attribute | Description |
+| --------- | ----------- |
+| id | id of the discout |
+| value | discount value |
+
+Returns list of products in cart including their attributes.
+
++ Request (application/json)
+
++ Response 200 (application/json)
+
+        {
+            "total_count": 2,
+            "total_price": 300,
+            "currency": "CZK",
+            "discounts": [
+                {
+                    "id": 1,
+                    "quantity": 1,
+                    "discount": {
+                        "id": 5,
+                        "value": 200
+                    }
+                },
+                {
+                    "id": 2,
+                    "quantity": 1,
+                    "discount": {
+                        "id": 5,
+                        "value": 200
+                    }
+                }
+            ],
+            "products": [
+                {
+                    "id": 1,
+                    "quantity": 1,
+                    "product": {
+                        "id": 5,
+                        "name": "Blue shirt",
+                        "price": 150,
+                        "discount_price": null,
+                        "image": "http://images.com/image001.jpg",
+                        "color_id": 2,
+                        "size_id": 8
+                    }
+                },{
+                    "id": 1,
+                    "quantity": 3,
+                    "product": {
+                        "id": 5,
+                        "name": "Blue shirt",
+                        "price": 150,
+                        "discount_price": null,
+                        "image": "http://images.com/image001.jpg",
+                        "color_id": 2,
+                        "size_id": 8
+                    }
+                }
+            ]
+        }
+
+### Add product to cart [POST]
+
+#### Product
+| Attribute | Description |
+| --------- | ----------- |
+| quantity | quantity of product |
+| product | shop product object |
+| id | product id |
+| color_id | id of product color |
+| size_id | id of product size |
+
+Returns cart product id
+
+#### Discount
+| Attribute | Description |
+| --------- | ----------- |
+| quantity | quantito of product |
+| discount | shop discount object |
+| id | discount id |
+| value | discount value in shop currency |
+
+Returns cart discount id
+
++ Request (application/json)
+
+        {
+            "quantity": 1,
+            "product": {
+                "id": 5,
+                "color_id": 2,
+                "size_id": 8
             }
+        }
+
++ Response 201 (application/json)   
+
+        {
+            "id": 1
+        }
+
+## Product in cart [/{user}/cart/{id}]
+
+### Update product [PUT]
++ Parameters
+    + id (id) ... cart product id
+
++ Request (application/json)
+
+        {
+            "quantity": 2,
+            "size_id: 8,
+            "color_id": 2
+        }
+
++ Response 200 (application/json)
+
+
+### Remove product from cart [DELETE]
+
+Remove product from cart
+
++ Parameters
+    + id (id) ... cart product id
+
++ Request (application/json)
+
+
++ Response 200 (application/json)
+
+# Group Cart discounts
+
+#### Discount
+
+## Discounts in cart [/{user}/cart/discounts]
+
+### Add discount to cart [POST]
+| Attribute | Description |
+| --------- | ----------- |
+| quantity | quantito of product |
+| discount | shop discount object |
+| id | discount id |
+| value | discount value in shop currency |
+
+Returns cart discount id
+
++ Request (application/json)
+
+        {
+            "quantity": 1,
+            "discount": {
+                "id": 5,
+                "value": 200
+            }
+        }   
+        
++ Response 201 (application/json)   
+
+        {
+            "id": 1
+        }
+        
++ Response 400
+
++ Response 422
+
++ Response 500
+
+        
+## Signle discount in cart [/{user}/cart/discounts/{id}]
+
+### Update discount [PUT]
++ Parameters
+    + id (id) ... cart discount id
+
++ Request (application/json)
+
+        {
+            "quantity": 2
+        }
+
++ Response 200 (application/json)
+
++ Response 400
+
++ Response 422
+
++ Response 500
+
+
+### Remove discount from cart [DELETE]
+
+Remove discount from cart
+
++ Parameters
+    + id (id) ... cart discount id
+
++ Request (application/json)
+
++ Response 200 (application/json)
+
++ Response 400
+
++ Response 422
+
++ Response 500
+
+# Group Wishlist
+
+| Attribute | Description |
+| --------- | ----------- |
+| products | list of products in wishlist |
+| total_count | total count of products |
+
+## Wishlist [/{user}/wishlist]
+
+### Get wishlist content [GET]
+| Attribute | Description |
+| --------- | ----------- |
+| total_count | number of products in wishlist |
+| products | products in wishlist |
+
+#### Product in wishlist
+| Attribute | Description |
+| --------- | ----------- |
+| id | wishlist product id (not product id!) |
+| product | shop product object |
+
+#### Shop product
+| Attribute | Description |
+| --------- | ----------- |
+| id | 5 |
+| name | name of the product |
+| price | price of the product |
+| discount_price | discount price of the product |
+| image | product image |
+| color_id | id of product color |
+| size_id | id of product size |
+
+Returns list of products in wishlist including their attributes.
+
++ Request (application/json)
+
++ Response 200 (application/json)
+
+        {
+            "total_count": 2,
+            "products": [
+                {
+                    "id": 1,
+                    "product": {
+                        "id": 5,
+                        "name": "Blue shirt",
+                        "price": 150,
+                        "discount_price": null,
+                        "image": "http://images.com/image001.jpg",
+                        "color_id": 2,
+                        "size_id": 8
+                    }
+                },{
+                    "id": 1,
+                    "product": {
+                        "id": 5,
+                        "name": "Blue shirt",
+                        "price": 150,
+                        "discount_price": null,
+                        "image": "http://images.com/image001.jpg",
+                        "color_id": 2,
+                        "size_id": 8
+                    }
+                }
+            ]
+        }
+
+### Add product to wishlist [POST]
+| Attribute | Description |
+| --------- | ----------- |
+| id | product id |
+| color_id | id of product color |
+| size_id | id of product size |
+
+Returns cart product id
+
++ Request (application/json)
+
+        {
+            "id": 5,
+            "color_id": 2,
+            "size_id": 8
+        }
+        
+
++ Response 201 (application/json)   
+
+        {
+            "id": 1
+        }
+
+## Product in wishlist [/{user}/wishlist/{id}]
+
+### Update product [PUT]
++ Parameters
+    + id (id) ... wishlist product id
+
++ Request (application/json)
+
+        {
+            "size_id: 8,
+            "color_id": 2
+        }
+
++ Response 200 (application/json)
+
+
+### Remove product from wishlist [DELETE]
++ Parameters
+    + id (id) ... wishlist product id
+
++ Request (application/json)
+
+
++ Response 200 (application/json)
+
+# Group Lists
+
+| Attribute | Description |
+| --------- | ----------- |
+| id | shipping identifier |
+| name | shipping method name |
+| min_cart_amount | min amount of cart for using this method |
+| price | price of shipping |
+| currency | shop currency |
+
+## Shippings collection [/lists/shipping]
+
+### List all pages [GET]
+
++ Request (application/json)
+
++ Response 200 (application/json)
+
+        {           
+            "records": [
+                {
+                    "id": 1,
+                    "name": "Shipping method 1",
+                    "min_cart_amount": 0,
+                    "price": 120,
+                    "currency": "CZK"
+                },
+                {
+                    "id": 2,
+                    "name": "Shipping method 2",
+                    "min_cart_amount": 199,
+                    "price": 100,
+                    "currency": "CZK"                
+                },
+                {
+                    "id": 3,
+                    "name": "Free",
+                    "min_cart_amount": 999,
+                    "price": 0,
+                    "currency": "CZK"                
+                }
+            ]
+        }
+
++ Response 200 (application/json)
+
+## Payments collection [/lists/payment]
+| Attribute | Description |
+| --------- | ----------- |
+| id | payment identifier |
+| name | payment method name |
+| price | price of payment method |
+| currency | shop currency |
+
+### List all pages [GET]
+
++ Request (application/json)
+
++ Response 200 (application/json)
+
+        {           
+            "records": [
+                {
+                    "id": 1,
+                    "name": "Payment method 1",
+                    "price": 10,
+                    "currency": "CZK"
+                },
+                {
+                    "id": 2,
+                    "name": "Payment method 2",
+                    "price": 20,
+                    "currency": "CZK"                
+                }
+            ]
+        }
+
+## Categories collection [/lists/categories]
+| Attribute | Description |
+| --------- | ----------- |
+| id | category identifier |
+| name | category name |
+| url | url of category |
+| children | list of subcategories |
+
+### Category tree [GET]
+
++ Request (application/json)
+
++ Response 200 (application/json)
+
+        {
+            "records": [
+                {  
+                    "id":18068,
+                    "name":"Fashion for plump",
+                    "url":"http:\/\/example.com\/something\/fashion-for-plump",
+                    "children": [
+                        {  
+                            "id":18070,
+                            "name":"Fashion for plump",
+                            "url":"http:\/\/example.com\/something\/fashion-for-plump",
+                        },
+                        {  
+                            "id":18071,
+                            "name":"Fashion for plump",
+                            "url":"http:\/\/example.com\/something\/fashion-for-plump",
+                        }
+                    ]
+                },
+                {  
+                    "id":18069,
+                    "name":"Fashion for plump",
+                    "url":"http:\/\/example.com\/something\/fashion-for-plump",
+                    "children": []
+                }
+            ] 
+        }
+        
+## Sizes collection [/lists/sizes]
+| Attribute | Description |
+| --------- | ----------- |
+| id | sizes category identifier |
+| name | sizes category name |
+| sizes | list of sizes in category |
+
+#### Size
+| Attribute | Description |
+| --------- | ----------- |
+| id | size identifier |
+| name | size name |
+| code | size code |
+
+### Sizes tree [GET]
+
++ Request (application/json)
+
++ Response 200 (application/json)
+
+        {
+            "records": [
+                {  
+                    "id": 123,
+                    "name": "Sizes: plump",
+                    "sizes": [
+                        {
+                            "id": 124,
+                            "name": "XL",
+                            "code": 28
+                        },
+                        {
+                            "id": 125,
+                            "name": "XXL",
+                            "code": 29
+                        }
+                    ]
+                },
+                {  
+                    "id": 128,
+                    "name": "Shoes sizes",
+                    "sizes": [
+                        {
+                            "id": 129,
+                            "name": "41",
+                            "code": 22
+                        },
+                        {
+                            "id": 130,
+                            "name": "42",
+                            "code": 23
+                        }
+                    ]
+                }
+            ] 
+        }
+
+## Colors collection [/lists/colors]
+| Attribute | Description |
+| --------- | ----------- |
+| id | color identifier |
+| name | color name |
+| rgb | RGB code of color (if possible) |
+| image | icon of color (if possible) |
+
+### List all colors [GET]
+
++ Request (application/json)
+
++ Response 200 (application/json)
+
+        {           
+            "records": [
+                {
+                    "id": 1,
+                    "name": "Black",
+                    "rgb": "#000000",
+                    "image": "http://example.com/black.png"
+                },
+                {
+                    "id": 2,
+                    "name": "Leopard",
+                    "rgb": null,
+                    "image": "http://example.com/leopard.png"
+                }
+            ]
+        }
+
+## Collections [/lists/collections]
+| Attribute | Description |
+| --------- | ----------- |
+| id | collection identifier |
+| name | collection name |
+| description | HTML description of collection |
+| category_id | id of category |
+| position | position in list |
+
+### List all collections [GET]
+
++ Request (application/json)
+
++ Response 200 (application/json)
+
+        {           
+            "records": [
+                {
+                    "id": 1,
+                    "name": "Apricot: romance from Great Britain",
+                    "descritpion": "Description of collections",
+                    "category_id": 123456,
+                    "position": 1
+                },
+                {
+                    
+                    "id": 2,
+                    "name": "Nike - Just do it!",
+                    "descritpion": "Description of collections",
+                    "category_id": 123456,
+                    "position": 8
+                },
+                {
+                    "id": 3,
+                    "name": "Adidas - impossible is nothing",
+                    "descritpion": "Description of collections",
+                    "category_id": 123456,
+                    "position": 5
+                }
+            ]
+        }
+
+## Brands collection [/lists/brands]
+| Attribute | Description |
+| --------- | ----------- |
+| id | brand identifier |
+| name | brand name |
+| description | HTML description of brand |
+| image | url of brand image |
+| url | url of brand |
+| position | position in list |
+
+### List all brands [GET]
+
++ Request (application/json)
+
++ Response 200 (application/json)
+
+        {           
+            "records": [
+                {
+                    "id": 1,
+                    "name": "Apricot",
+                    "descritpion": "Description of brand",
+                    "image": "http://example.com/image.png",
+                    "url": "http:\/\/www.example.com\/junarose",
+                    "position": 1
+                },
+                {
+                    "id": 2,
+                    "name": "Apricot",
+                    "descritpion": "Description of brand",
+                    "image": "http://example.com/image.png",
+                    "url": "http:\/\/www.example.com\/junarose",
+                    "position": 4
+                },
+                {
+                    "id": 3,
+                    "name": "Apricot",
+                    "descritpion": "Description of brand",
+                    "image": "http://example.com/image.png",
+                    "url": "http:\/\/www.example.com\/junarose",
+                    "position": 5
+                }
+            ]
+        }
